@@ -49,6 +49,7 @@ import org.knowm.xchange.ftx.dto.trade.FtxOrderFlags;
 import org.knowm.xchange.ftx.dto.trade.FtxOrderRequestPayload;
 import org.knowm.xchange.ftx.dto.trade.FtxOrderSide;
 import org.knowm.xchange.ftx.dto.trade.FtxOrderType;
+import org.knowm.xchange.ftx.service.FtxAccountInfo;
 import org.knowm.xchange.utils.jackson.CurrencyPairDeserializer;
 
 public class FtxAdapters {
@@ -136,11 +137,11 @@ public class FtxAdapters {
             .id("spot")
             .build();
 
-    return new AccountInfo(
+    return new FtxAccountInfo(
         result.getUsername(),
         result.getTakerFee(),
         Collections.unmodifiableList(Arrays.asList(accountWallet, spotWallet)),
-        Date.from(Instant.now()));
+        Date.from(Instant.now()), totalAccountValue);
   }
 
   public static ExchangeMetaData adaptExchangeMetaData(FtxMarketsDto marketsDto) {

@@ -9,24 +9,32 @@ import org.knowm.xchange.utils.DigestUtils;
 import si.mazi.rescu.RestInvocation;
 
 public class FtxDigest extends BaseParamsDigest {
+  private static final String HEADER_TS_NAME = "FTX-TS";
+  public static final String HEADER_US_TS_NAME = "FTXUS-TS";
 
-  private FtxDigest(byte[] secretKey) {
+  private final String tsHeaderName;
 
+  private FtxDigest(byte[] secretKey, boolean useFTXUSHeader) {
     super(secretKey, HMAC_SHA_256);
+    this.tsHeaderName = useFTXUSHeader ? HEADER_US_TS_NAME : HEADER_TS_NAME;
   }
 
   public static FtxDigest createInstance(String secretKey) {
-
     if (secretKey != null) {
-      return new FtxDigest(secretKey.getBytes());
+      return new FtxDigest(secretKey.getBytes(), false);
+    } else return null;
+  }
+
+  public static FtxDigest createFTXUSInstance(String secretKey) {
+    if (secretKey != null) {
+      return new FtxDigest(secretKey.getBytes(), true);
     } else return null;
   }
 
   @Override
   public String digestParams(RestInvocation restInvocation) {
-
     String message =
-        restInvocation.getParamValue(HeaderParam.class, "FTX-TS").toString()
+        restInvocation.getParamValue(HeaderParam.class, tsHeaderName).toString()
             + restInvocation.getHttpMethod().toUpperCase()
             + restInvocation.getPath();
 

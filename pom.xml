@@ -529,6 +529,7 @@
           <quiet>true</quiet>
           <doclint>none</doclint>
           <source>${version.java}</source>
+          <javadocExecutable>/snap/android-studio/119/android-studio/jre/bin/javadoc</javadocExecutable>
         </configuration>
       </plugin>
       <plugin>

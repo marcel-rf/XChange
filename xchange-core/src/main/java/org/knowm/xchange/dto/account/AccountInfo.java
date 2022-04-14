@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
  *
  * <p>Account information is anything particular associated with the user's login
  */
-public final class AccountInfo implements Serializable {
+public class AccountInfo implements Serializable {
 
   private static final long serialVersionUID = -3572240060624800060L;
 

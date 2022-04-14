@@ -50,7 +50,7 @@ public interface FtxAuthenticated extends Ftx {
   @GET
   @Path("/account")
   FtxResponse<FtxAccountDto> getAccountInformation(
-      @HeaderParam("FTX-KEY") String apiKey,
+      @HeaderParam("FTXUS-KEY") String apiKey,
       @HeaderParam("FTX-TS") Long nonce,
       @HeaderParam("FTX-SIGN") ParamsDigest signature,
       @HeaderParam("FTX-SUBACCOUNT") String subaccount)
@@ -59,7 +59,7 @@ public interface FtxAuthenticated extends Ftx {
   @GET
   @Path("/wallet/balances")
   FtxResponse<List<FtxWalletBalanceDto>> getWalletBalances(
-      @HeaderParam("FTX-KEY") String apiKey,
+      @HeaderParam("FTXUS-KEY") String apiKey,
       @HeaderParam("FTX-TS") Long nonce,
       @HeaderParam("FTX-SIGN") ParamsDigest signature,
       @HeaderParam("FTX-SUBACCOUNT") String subaccount)
@@ -68,7 +68,7 @@ public interface FtxAuthenticated extends Ftx {
   @GET
   @Path("/positions")
   FtxResponse<List<FtxPositionDto>> getFtxPositions(
-      @HeaderParam("FTX-KEY") String apiKey,
+      @HeaderParam("FTXUS-KEY") String apiKey,
       @HeaderParam("FTX-TS") Long nonce,
       @HeaderParam("FTX-SIGN") ParamsDigest signature,
       @HeaderParam("FTX-SUBACCOUNT") String subaccount)
@@ -77,7 +77,7 @@ public interface FtxAuthenticated extends Ftx {
   @DELETE
   @Path("/subaccounts")
   FtxResponse deleteSubAccounts(
-      @HeaderParam("FTX-KEY") String apiKey,
+      @HeaderParam("FTXUS-KEY") String apiKey,
       @HeaderParam("FTX-TS") Long nonce,
       @HeaderParam("FTX-SIGN") ParamsDigest signature,
       FtxSubAccountRequestPOJO payload)
@@ -86,7 +86,7 @@ public interface FtxAuthenticated extends Ftx {
   @GET
   @Path("/subaccounts")
   FtxResponse<List<FtxSubAccountDto>> getAllSubAccounts(
-      @HeaderParam("FTX-KEY") String apiKey,
+      @HeaderParam("FTXUS-KEY") String apiKey,
       @HeaderParam("FTX-TS") Long nonce,
       @HeaderParam("FTX-SIGN") ParamsDigest signature)
       throws IOException, FtxException;
@@ -94,7 +94,7 @@ public interface FtxAuthenticated extends Ftx {
   @POST
   @Path("/subaccounts")
   FtxResponse<FtxSubAccountDto> createSubAccount(
-      @HeaderParam("FTX-KEY") String apiKey,
+      @HeaderParam("FTXUS-KEY") String apiKey,
       @HeaderParam("FTX-TS") Long nonce,
       @HeaderParam("FTX-SIGN") ParamsDigest signature,
       @HeaderParam("FTX-SUBACCOUNT") String subaccount,
@@ -104,7 +104,7 @@ public interface FtxAuthenticated extends Ftx {
   @POST
   @Path("/subaccounts/update_name")
   FtxResponse changeSubAccountName(
-      @HeaderParam("FTX-KEY") String apiKey,
+      @HeaderParam("FTXUS-KEY") String apiKey,
       @HeaderParam("FTX-TS") Long nonce,
       @HeaderParam("FTX-SIGN") ParamsDigest signature,
       FtxChangeSubAccountNamePOJO payload)
@@ -113,7 +113,7 @@ public interface FtxAuthenticated extends Ftx {
   @GET
   @Path("/subaccounts/{nickname}/balances")
   FtxResponse<FtxSubAccountBalanceDto> getSubAccountBalances(
-      @HeaderParam("FTX-KEY") String apiKey,
+      @HeaderParam("FTXUS-KEY") String apiKey,
       @HeaderParam("FTX-TS") Long nonce,
       @HeaderParam("FTX-SIGN") ParamsDigest signature,
       @HeaderParam("FTX-SUBACCOUNT") String subaccount,
@@ -123,7 +123,7 @@ public interface FtxAuthenticated extends Ftx {
   @POST
   @Path("/subaccounts/transfer")
   FtxResponse<FtxSubAccountTranferDto> transferBetweenSubAccounts(
-      @HeaderParam("FTX-KEY") String apiKey,
+      @HeaderParam("FTXUS-KEY") String apiKey,
       @HeaderParam("FTX-TS") Long nonce,
       @HeaderParam("FTX-SIGN") ParamsDigest signature,
       @HeaderParam("FTX-SUBACCOUNT") String subaccount,

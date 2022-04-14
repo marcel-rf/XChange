@@ -3,6 +3,7 @@ package org.knowm.xchange.ftx.service;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.client.ExchangeRestProxyBuilder;
 import org.knowm.xchange.ftx.FtxAuthenticated;
+import org.knowm.xchange.ftx.FtxUSAuthenticated;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.knowm.xchange.service.BaseService;
 import si.mazi.rescu.ParamsDigest;
@@ -15,10 +16,21 @@ public class FtxBaseService extends BaseExchangeService implements BaseService {
   public FtxBaseService(Exchange exchange) {
     super(exchange);
 
-    ftx =
-        ExchangeRestProxyBuilder.forInterface(
-                FtxAuthenticated.class, exchange.getExchangeSpecification())
-            .build();
-    signatureCreator = FtxDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
+    if ("ftx.us".equals(exchange.getExchangeSpecification().getHost())) {
+      ftx =
+              ExchangeRestProxyBuilder.forInterface(
+                      FtxUSAuthenticated.class, exchange.getExchangeSpecification())
+                      .build();
+      signatureCreator = FtxDigest.createFTXUSInstance(exchange.getExchangeSpecification().getSecretKey());
+
+    } else {
+      ftx =
+              ExchangeRestProxyBuilder.forInterface(
+                      FtxAuthenticated.class, exchange.getExchangeSpecification())
+                      .build();
+      signatureCreator = FtxDigest.createInstance(exchange.getExchangeSpecification().getSecretKey());
+    }
+
+
   }
 }
